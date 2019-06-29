@@ -1,15 +1,20 @@
 package com.allied.quoteapp.rest.models
 
-import com.allied.quoteapp.entities.*
+data class QuoteFormModel(
+        val name: String?,
+        val products: List<String>?,
+        val dimension: String?,
+        val finish: List<String>?,
+        val woodType: String?,
+        val tier: String?,
+        val packaging: String?,
+        val customer: String?
+)
 
-data class CustomerQuoteModel(
-        val id: Long,
-        val name: String,
-        val products: List<Product>,
-        val dimension: Dimension,
-        val finish: Finish,
-        val woodType: WoodType,
-        val tier: Tier,
-        val packaging: Packaging,
-        val customer: Customer
+data class CustomerFormModel(
+    var name: String,
+    var address: String,
+    var contactEmail: String,
+    var phone: String,
+    var updatedBy: String = ""
 )

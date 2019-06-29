@@ -1,13 +1,23 @@
 spring:
+  devtools:
+    restart:
+      enabled: true
+  thymeleaf:
+    prefix: file:src/main/resources/templates/
+    cache: false
+  resources:
+    static-locations: file:src/main/resources/static/
+    cache: false
   queries:
-    user-query: select email, password, active from user where email=?
-    roles-query: select u.email, r.role from user u inner join user_role ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?
+    user-query: select user_email, password, active from users where user_email=?
+    roles-query: select u.user_email, r.role from users u inner join user_roles ur on(id=ur.user_id) inner join roles r on(ur.role_id=r.id) where u.user_email=?
   jpa:
     properties:
       hibernate:
         jdbc:
           lob:
             non_contextual_creation: true
+    show-sql: true
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://192.168.99.100:3306/quotes_db
@@ -21,3 +31,4 @@ spring:
 logging:
   level:
     org.springframework: debug
+

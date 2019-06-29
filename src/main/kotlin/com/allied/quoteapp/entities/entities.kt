@@ -1,20 +1,21 @@
 package com.allied.quoteapp.entities
 
 import java.time.LocalDate
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Table(name = "products")
 @Entity
 data class Product(
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
 
         @Column(name = "name")
         val name: String,
 
         @Column(name = "updated_at")
-        val updatedAt: LocalDate,
+        val updatedAt: LocalDateTime,
 
         @Column(name = "updated_by")
         val updatedBy: Long
@@ -24,14 +25,14 @@ data class Product(
 @Entity
 data class Dimension(
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
 
         @Column(name = "dimension")
         val dimension: Double,
 
         @Column(name = "updated_at")
-        val updatedAt: LocalDate,
+        val updatedAt: LocalDateTime,
 
         @Column(name = "updated_by")
         val updatedBy: Long
@@ -41,14 +42,14 @@ data class Dimension(
 @Entity
 data class Finish(
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
 
         @Column(name = "name")
         val name: String,
 
         @Column(name = "updated_at")
-        val updatedAt: LocalDate,
+        val updatedAt: LocalDateTime,
 
         @Column(name = "updated_by")
         val updatedBy: Long
@@ -58,14 +59,14 @@ data class Finish(
 @Entity
 data class WoodType(
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
 
         @Column(name = "name")
         val name: String,
 
         @Column(name = "updated_at")
-        val updatedAt: LocalDate,
+        val updatedAt: LocalDateTime,
 
         @Column(name = "updated_by")
         val updatedBy: Long
@@ -75,14 +76,14 @@ data class WoodType(
 @Entity
 data class Tier(
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
 
         @Column(name = "name")
         val name: String,
 
         @Column(name = "updated_at")
-        val updatedAt: LocalDate,
+        val updatedAt: LocalDateTime,
 
         @Column(name = "updated_by")
         val updatedBy: Long
@@ -92,14 +93,14 @@ data class Tier(
 @Entity
 data class Packaging(
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
 
         @Column(name = "name")
         val name: String,
 
         @Column(name = "updated_at")
-        val updatedAt: LocalDate,
+        val updatedAt: LocalDateTime,
 
         @Column(name = "updated_by")
         val updatedBy: Long
@@ -109,14 +110,14 @@ data class Packaging(
 @Entity
 data class Customer(
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        val id: Long,
+        @GeneratedValue(strategy=GenerationType.IDENTITY)
+        val id: Long? = null,
 
         @Column(name = "name")
         val name: String,
 
         @Column(name = "updated_at")
-        val updatedAt: LocalDate,
+        val updatedAt: LocalDateTime,
 
         @Column(name = "updated_by")
         val updatedBy: Long,
@@ -129,17 +130,17 @@ data class Customer(
 
 )
 
-@Table(name = "customer_quotes")
+@Table(name = "customer_quotes_items")
 @Entity
-data class CustomerQuote(
+data class CustomerQuoteItem(
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
 
         @Column(name = "customer_id")
         val customerId: Long,
 
-        @Column(name = "product_id")
+        @Column(name = "quote_items_id")
         val productId: Long,
 
         @Column(name = "dimension_id")
@@ -161,17 +162,36 @@ data class CustomerQuote(
         val price: Double,
 
         @Column(name = "updated_at")
-        val updatedAt: LocalDate,
+        val updatedAt: LocalDateTime,
 
         @Column(name = "updated_by")
         val updatedBy: Long
 )
 
 @Entity
+@Table(name = "customer_quotes")
+data class CustomerQuote(
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        val id: Long,
+
+        @Column(name = "customer_id")
+        val customerId: Long,
+
+        @Column(name = "updated_at")
+        val updatedAt: LocalDateTime,
+
+        @Column(name = "updated_by")
+        val updatedBy: Long
+
+
+)
+
+@Entity
 @Table(name = "users")
 data class User(
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
 
         @Column(name = "user_email")
@@ -190,7 +210,7 @@ data class User(
         val active: Int,
 
         @Column(name = "updated_at")
-        val updatedAt: LocalDate,
+        val updatedAt: LocalDateTime,
 
         @Column(name = "updated_by")
         val updatedBy: Long,
@@ -206,7 +226,7 @@ data class User(
 @Table(name = "roles")
 data class Role(
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
 
         @Column(name = "role")

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="fragments/head :: head"/>
+<body>
+  <!-- Header -->
+  <th:block th:replace="fragments/header :: header" />
+
+  <form class="form" th:action="@{/quotes/create}" method="post">
+    <fieldset>
+      <legend>Quote details</legend>
+      <div class="form-group row">
+        <label class="col-4" for="products">Products</label>
+        <div class="col-8">
+            <select id="products" name="products" class="custom-select" multiple="multiple" required="required">
+              <option th:each="product: ${products}" th:value="${product.id}" th:text="${product.name}"></option>
+            </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-4" for="dimension">Dimensions</label>
+        <div class="col-8">
+          <select id="dimension" name="dimension" class="custom-select" required="required">
+            <option th:each="dimension: ${dimensions}" th:value="${dimension.id}" th:text="${dimension.dimension}"></option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-4" for="woddType">Wood Type</label>
+        <div class="col-8">
+          <select id="woddType" name="woodType" class="custom-select" required="required">
+            <option th:each="woodType: ${woodTypes}" th:value="${woodType.id}" th:text="${woodType.name}"></option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-4" for="finishes">Slat Finish</label>
+        <div class="col-8">
+          <select id="finishes" name="finishes" class="custom-select" multiple="multiple" required="required">
+            <option th:each="finish: ${finishes}" th:value="${finish.id}" th:text="${finish.name}"></option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-4" for="tier">Tier</label>
+        <div class="col-8">
+          <select id="tier" name="tier" class="custom-select" required="required">
+            <option th:each="tier: ${tiers}" th:value="${tier.id}" th:text="${tier.name}"></option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-4" for="packaging">Packaging</label>
+        <div class="col-8">
+          <select id="packaging" name="packaging" class="custom-select" required="required">
+            <option th:each="package: ${packages}" th:value="${package.id}" th:text="${package.name}"></option>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Customer details</legend>
+      <div class="form-group row">
+        <label for="name" class="col-4 col-form-label">Customer Name</label>
+        <div class="col-8">
+          <div class="input-group">
+            <input id="name" name="name" type="text" class="form-control" required="required">
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="contactEmail" class="col-4 col-form-label">Contact Email</label>
+        <div class="col-8">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="fa fa-address-card"></i>
+              </div>
+            </div>
+            <input id="contactEmail" name="contactEmail" type="email" class="form-control"
+                   required="required">
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="address" class="col-4 col-form-label">Address</label>
+        <div class="col-8">
+          <div class="input-group">
+        <textarea id="address" name="address" type="text" class="form-control"
+                  required="required"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="phone" class="col-4 col-form-label">Phone</label>
+        <div class="col-8">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="fa fa-phone"></i>
+              </div>
+            </div>
+            <input id="phone" name="phone" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <div class="form-group row">
+      <div class="offset-4 col-8">
+        <button name="submit" type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </form>
+  <!-- Footer -->
+  <th:block th:replace="fragments/footer :: footer" />
+</body>
+</html>

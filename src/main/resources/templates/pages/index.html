@@ -1,7 +1,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:with="http://www.thymeleaf.org/extras/with"
       with:title="'Login">
-<th:block th:replace="fragments/header :: header"/>
+<th:block th:replace="fragments/login-head :: login-head"/>
 <body class="text-center">
 <form class="form-signin" method="post" th:action="@{/login}">
   <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="fragments/head :: head"/>
+<body>
+<!-- Header -->
+<th:block th:replace="fragments/header :: header" />
+<span><a th:href="@{/customers}">Create Customer</a></span>
+
+<!-- Footer -->
+<th:block th:replace="fragments/footer :: footer"/>
+</body>
+</html>
