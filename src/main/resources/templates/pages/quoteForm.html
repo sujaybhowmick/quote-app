@@ -5,7 +5,7 @@
   <!-- Header -->
   <th:block th:replace="fragments/header :: header" />
 
-  <form class="form" th:action="@{/quotes/create}" method="post">
+  <form class="form" th:action="@{/quote/create}" method="post">
     <fieldset>
       <legend>Quote details</legend>
       <div class="form-group row">
@@ -60,10 +60,10 @@
     <fieldset>
       <legend>Customer details</legend>
       <div class="form-group row">
-        <label for="name" class="col-4 col-form-label">Customer Name</label>
+        <label for="customerName" class="col-4 col-form-label">Customer Name</label>
         <div class="col-8">
           <div class="input-group">
-            <input id="name" name="name" type="text" class="form-control" required="required">
+            <input id="customerName" name="customerName" type="text" class="form-control" required="required">
           </div>
         </div>
       </div>

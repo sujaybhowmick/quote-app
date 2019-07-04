@@ -13,7 +13,7 @@ class IndexController : BaseController() {
     companion object {
         private val logger = LoggerFactory.getLogger(QuoteController::class.java)
         private const val LOGIN_INDEX_VIEW = "pages/index"
-        private const val QUOTES_VIEW = "pages/quotes"
+        private const val QUOTES_REDIRECT_VIEW = "quote/list"
 
     }
     @GetMapping(value = ["/", "/login"])
@@ -24,7 +24,7 @@ class IndexController : BaseController() {
             if(logger.isDebugEnabled){
                 logger.debug("User is authenticated")
             }
-            return QUOTES_VIEW
+            return "redirect:$QUOTES_REDIRECT_VIEW"
         }
         return LOGIN_INDEX_VIEW
     }

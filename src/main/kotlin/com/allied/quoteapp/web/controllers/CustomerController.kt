@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod
 import javax.validation.Valid
 
 @Controller
-@RequestMapping("customers")
+@RequestMapping("customer")
 class CustomerController : BaseController() {
 
     companion object {

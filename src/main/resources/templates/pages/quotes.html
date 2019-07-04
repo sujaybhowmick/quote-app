@@ -4,7 +4,64 @@
 <body>
   <!-- Header -->
   <th:block th:replace="fragments/header :: header" />
-  <span><a th:href="@{/quotes}">Create a Quote</a></span>
+  <div class="container">
+    <span><a th:href="@{/quote}">Create a Quote</a></span>
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">Quote ID</th>
+        <th scope="col">Customer</th>
+        <th scope="col">Products</th>
+        <th score="col">Dimension</th>
+        <th scope="col">Finish</th>
+        <th scope="col">Wood Type</th>
+        <th scope="col">Tier</th>
+        <th scope="col">Packaging</th>
+        <th scope="col">Created Date</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="quote: ${pagedQuotes.quoteViewModel}">
+        <th th:text="${quote.id}"></th>
+        <td>
+          <p th:text="${quote.customer.name}"></p>
+        </td>
+        <td>
+          <p th:each="product: ${quote.products}">
+            <span th:text="${product.name}"></span>
+          </p>
+        </td>
+        <td>
+          <p th:text="${quote.dimension.dimension}"></p>
+        </td>
+        <td>
+          <p th:each="finish: ${quote.finishes}">
+            <span th:text="${finish.name}"></span>
+          </p>
+        </td>
+        <td>
+          <p th:text="${quote.woodType.name}"></p>
+        </td>
+        <td>
+          <p th:text="${quote.tier.name}"></p>
+        </td>
+        <td>
+          <p th:text="${quote.packaging.name}"></p>
+        </td>
+        <td>
+          <p th:text="${quote.updatedAt}"></p>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item" th:each="page: ${#numbers.sequence(1, pagedQuotes.totalPages)}">
+          <a class="page-link" th:href="@{list(page=${page})}" th:text="${page}"></a>
+        </li>
+      </ul>
+    </nav>
+  </div>
 
   <!-- Footer -->
   <th:block th:replace="fragments/footer :: footer"/>

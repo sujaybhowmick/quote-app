@@ -28,6 +28,7 @@ spring:
       maximum-pool-size: 3
   main:
     allow-bean-definition-overriding: true
+  page-size: 5
 logging:
   level:
     org.springframework: debug

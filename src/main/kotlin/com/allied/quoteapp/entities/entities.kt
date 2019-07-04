@@ -1,5 +1,7 @@
 package com.allied.quoteapp.entities
 
+import org.hibernate.annotations.OnDelete
+import org.hibernate.annotations.OnDeleteAction
 import java.time.LocalDate
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -127,6 +129,34 @@ data class Customer(
 
         @Column(name = "contact_email")
         val contactEmail: String
+)
+
+@Entity
+@Table(name = "customer_quotes")
+data class CustomerQuote(
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        val id: Long? = null,
+
+        @OneToOne(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
+        @JoinColumn(name = "customer_id")
+        val customer: Customer,
+
+        @Column(name = "updated_at")
+        val updatedAt: LocalDateTime,
+
+        @Column(name = "updated_by")
+        val updatedBy: Long,
+
+        @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
+        @JoinColumn(name = "quote_id")
+        @OnDelete(action = OnDeleteAction.CASCADE)
+        val customerQuoteItems: Set<CustomerQuoteItem>,
+
+        @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
+        @JoinColumn(name = "quote_id")
+        @OnDelete(action = OnDeleteAction.CASCADE)
+        val quoteFinishes: Set<CustomerQuoteFinish>
 
 )
 
@@ -135,56 +165,39 @@ data class Customer(
 data class CustomerQuoteItem(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Long,
+        val id: Long?,
 
-        @Column(name = "customer_id")
-        val customerId: Long,
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name="product_id", referencedColumnName = "id")
+        val product: Product,
 
-        @Column(name = "quote_items_id")
-        val productId: Long,
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "dimension_id", referencedColumnName = "id")
+        val dimension: Dimension,
 
-        @Column(name = "dimension_id")
-        val dimensionId: Long,
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "wood_type_id", referencedColumnName = "id")
+        val woodType: WoodType,
 
-        @Column(name = "wood_type_id")
-        val woodTypeId: Long,
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "tier_id", referencedColumnName = "id")
+        val tier: Tier,
 
-        @Column(name = "finish_id")
-        val finishId: Long,
-
-        @Column(name = "tier_id")
-        val tierId: Long,
-
-        @Column(name = "packaging_id")
-        val packagingId: Long,
-
-        @Column(name = "price")
-        val price: Double,
-
-        @Column(name = "updated_at")
-        val updatedAt: LocalDateTime,
-
-        @Column(name = "updated_by")
-        val updatedBy: Long
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "packaging_id", referencedColumnName = "id")
+        val packaging: Packaging
 )
 
 @Entity
-@Table(name = "customer_quotes")
-data class CustomerQuote(
+@Table(name = "customer_quote_finishes")
+data class CustomerQuoteFinish(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Long,
+        val id: Long? = null,
 
-        @Column(name = "customer_id")
-        val customerId: Long,
-
-        @Column(name = "updated_at")
-        val updatedAt: LocalDateTime,
-
-        @Column(name = "updated_by")
-        val updatedBy: Long
-
-
+        @OneToOne(fetch = FetchType.EAGER)
+        @JoinColumn(name = "finish_id", referencedColumnName = "id")
+        val finish: Finish
 )
 
 @Entity
